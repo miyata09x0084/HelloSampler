@@ -52,8 +52,18 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
-
+    
+    void setupSampler(juce::AudioFormatReader& newReader);
+    void loadSineWave();
+    void loadSampleFile();
+    juce::MidiKeyboardState& getMidiKeyboardState() { return keyboardState; };
+    
+    
 private:
+    juce::Synthesiser synth;
+    juce::MidiKeyboardState keyboardState;
+    bool isChanging;
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OneShotSmplerAudioProcessor)
 };
