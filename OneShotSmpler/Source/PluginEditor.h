@@ -14,7 +14,7 @@
 //==============================================================================
 /**
 */
-class OneShotSmplerAudioProcessorEditor  : public juce::AudioProcessorEditor
+class OneShotSmplerAudioProcessorEditor  : public juce::AudioProcessorEditor, private juce::Button::Listener
 {
 public:
     OneShotSmplerAudioProcessorEditor (OneShotSmplerAudioProcessor&);
@@ -25,9 +25,13 @@ public:
     void resized() override;
 
 private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
-    OneShotSmplerAudioProcessor& audioProcessor;
+    void buttonClicked(juce::Button* button) override;
+    
+    juce::TextButton sineWaveButton;
+    juce::TextButton sampleSelectionButton;
+    juce::MidiKeyboardComponent keyboardComponent;
+    
+    OneShotSmplerAudioProcessor& processor;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (OneShotSmplerAudioProcessorEditor)
 };
