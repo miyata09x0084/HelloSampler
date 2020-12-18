@@ -93,8 +93,9 @@ void OneShotSmplerAudioProcessor::changeProgramName (int index, const juce::Stri
 //==============================================================================
 void OneShotSmplerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    synth.setCurrentPlaybackSampleRate(sampleRate);
+
+    keyboardState.reset();
 }
 
 void OneShotSmplerAudioProcessor::releaseResources()
@@ -180,6 +181,7 @@ void OneShotSmplerAudioProcessor::setStateInformation (const void* data, int siz
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
 }
+
 
 //==============================================================================
 // This creates new instances of the plugin..
