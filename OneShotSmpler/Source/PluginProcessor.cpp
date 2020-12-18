@@ -206,3 +206,25 @@ void OneShotSmplerAudioProcessor::setupSampler(juce::AudioFormatReader& newReade
     
     isChanging = false;
 }
+
+
+void OneShotSmplerAudioProcessor::loadSampleFile()
+{
+    juce::AudioFormatManager formatManager;
+    formatManager.registerBasicFormats();
+
+    juce::FileChooser chooser("Open audio file to play.", formatManager.getWildcardForAllFormats());
+
+    if (chooser.browseForFileToOpen())
+    {
+        juce::File file(chooser.getResult());
+        juce::AudioFormatReader* reader = formatManager.createReaderFor(chooser.getResult());
+
+        if (reader != nullptr)
+        {
+            setupSampler(*reader);
+
+            delete reader;
+        }
+    }
+}
