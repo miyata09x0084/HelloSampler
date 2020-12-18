@@ -187,3 +187,22 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new OneShotSmplerAudioProcessor();
 }
+
+void OneShotSmplerAudioProcessor::setupSampler(juce::AudioFormatReader& newReader)
+{
+    isChanging = true;
+    
+    synth.clearSounds();
+    synth.clearVoices();
+    
+    juce::BigInteger allNotes;
+    allNotes.setRange(0, 128, true);
+    
+    synth.addSound(new juce::SamplerSound("default", newReader, allNotes, 60, 0, 0.1, 10.0));
+    
+    for (int i = 0; i < 128; i++) {
+        synth.addVoice(new juce::SamplerVoice());
+    }
+    
+    isChanging = false;
+}
