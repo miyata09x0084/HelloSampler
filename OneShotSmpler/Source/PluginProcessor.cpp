@@ -100,8 +100,9 @@ void OneShotSmplerAudioProcessor::prepareToPlay (double sampleRate, int samplesP
 
 void OneShotSmplerAudioProcessor::releaseResources()
 {
-    // When playback stops, you can use this as an opportunity to free up any
-    // spare memory, etc.
+    keyboardState.allNotesOff(0);
+
+    keyboardState.reset();
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
