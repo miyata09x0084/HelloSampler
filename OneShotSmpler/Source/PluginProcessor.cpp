@@ -197,6 +197,22 @@ void OneShotSmplerAudioProcessor::setupSampler(juce::AudioFormatReader& newReade
     isChanging = false;
 }
 
+void OneShotSmplerAudioProcessor::loadSineWave()
+{
+    juce::AudioFormatManager formatManager;
+    formatManager.registerBasicFormats();
+
+    juce::MemoryInputStream* inputStream = new juce::MemoryInputStream(BinaryData::sine_wav, BinaryData::sine_wavSize, true);
+
+//    juce::AudioFormatReader* reader = formatManager.createReaderFor(inputStream);
+//
+//    if (reader != nullptr)
+//    {
+//        setupSampler(*reader);
+//        delete reader;
+//    }
+}
+
 
 void OneShotSmplerAudioProcessor::loadSampleFile()
 {
