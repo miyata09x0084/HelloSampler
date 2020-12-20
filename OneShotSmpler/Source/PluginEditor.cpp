@@ -47,3 +47,14 @@ void OneShotSmplerAudioProcessorEditor::resized()
     sampleSelectionButton.setBoundsRelative(0.6, 0.2, 0.2, 0.2);
     keyboardComponent.setBoundsRelative(0.0, 0.7, 1.0, 0.3);
 }
+
+void OneShotSmplerAudioProcessorEditor::buttonClicked(juce::Button* button)
+{
+    if (button == &sineWaveButton) {
+        processor.loadSineWave();
+    }
+    else if (button == &sampleSelectionButton) {
+        processor.loadSampleFile();
+    }
+
+}
