@@ -11,11 +11,19 @@
 
 //==============================================================================
 OneShotSmplerAudioProcessorEditor::OneShotSmplerAudioProcessorEditor (OneShotSmplerAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+    : AudioProcessorEditor (&p), processor (p)
+    , keyboardComponent(p.getMidiKeyboardState(), juce::MidiKeyboardComponent::horizontalKeyboard)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    sineWaveButton.setButtonText("Sine Wave");
+    sineWaveButton.addListener(this);
+    sampleSelectionButton.setButtonText("Sample Select");
+    sampleSelectionButton.addListener(this);
+    
+    addAndMakeVisible(sineWaveButton);
+    addAndMakeVisible(sampleSelectionButton);
+    addAndMakeVisible(keyboardComponent);
+    
+    setSize(800, 600);
 }
 
 OneShotSmplerAudioProcessorEditor::~OneShotSmplerAudioProcessorEditor()
@@ -35,6 +43,7 @@ void OneShotSmplerAudioProcessorEditor::paint (juce::Graphics& g)
 
 void OneShotSmplerAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    sineWaveButton.setBoundsRelative(0.2, 0.2, 0.2, 0.2);
+    sampleSelectionButton.setBoundsRelative(0.6, 0.2, 0.2, 0.2);
+    keyboardComponent.setBoundsRelative(0.0, 0.7, 1.0, 0.3);
 }
